@@ -1,69 +1,70 @@
-
 public class Q2{
 	public static void main(String[] args){
-		LinkedList li = new LinkedList();
-		li.head = new Node(1);
-
-		Node second = new Node(2);
-		Node third = new Node(3);
-		Node fourth = new Node(4);
-		Node fifth = new Node(5);
+		LinkedList li = new LinkedList(); 
 		
+		li.append(1).append(2).append(3).append(4).append(5).append(6); // [1, 2, 3, 4, 5, 6]
 
-		li.head.next = second;
-		second.next = third;
-		third.next = fourth;
-		fourth.next = fifth;
+		int k = 2;
+		System.out.println(li.find(k)); // 4
 
-		int k = Integer.parseInt(args[0]);
+		k = 5;
+		System.out.println(li.find(k)); // 1
 
-		System.out.println(find(li, k));
+		k = 0;
+		System.out.println(li.find(k)); // 6
+
+		k = 7;
+		System.out.println(li.find(k)); // No such element\nnull
+	}
+}
+
+class LinkedList{
+	Node head;
+	int size;
+
+	LinkedList(){
+		size = 0;
 	}
 
-	public static Integer find(LinkedList li, int k){ // finds the kth element to the last in the given list li
-		int si = size(li);	
+	LinkedList append(int n){
+		if(size == 0)
+			this.head = new Node(n);
+		else
+			this.get(size - 1).next = new Node(n);
+		size++;
 		
-		if(si <= k){
-			System.out.println("No such element");
-			return null;
-		}
-		
-		return get(si - k, li);
+		return this;
 	}
-
-	public static int size(LinkedList li){ // returns the size of the list
-		Node current = li.head;  
+		
+	Node get(int pos){ // returns the element at a given position from the list
+		Node current = this.head;  
 		int count = 0; 
 
-		while (current != null)
-		{
-		    current = current.next;
-		    count ++;
+		if(pos == 0){
+			return current;
 		}
-		return count; 
-    	}
-
-	public static Integer get(int pos, LinkedList li){ // returns the element at a given position from the list
-		Node current = li.head;  
-		int count = 1; 
-
-		if(pos == 1)
-			return current.data;
 
 		while (current != null)
 		{
 		    current = current.next;
 		    count ++;
 		    if(count == pos)
-			return current.data;
+			return current;
 		}
 		System.err.println("error");
-		return 0;
+		return null;
 	}
-}
-
-class LinkedList{
-	Node head;  
+	
+	Integer find(int k){ // finds the kth element to the last in the given list li
+		int si = size;	
+		
+		if(si <= k || k < 0){
+			System.out.println("No such element");
+			return null;
+		}
+		
+		return this.get(si - k - 1).data;
+	}
 }
 
 class Node{
