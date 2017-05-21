@@ -1,13 +1,18 @@
 public class Q1{
 
 	public static void main(String[] args){
-		System.out.println(fun("abc", "BC!"));
+		System.out.println(perm("Aa", "aA")); // Result after comparing the strings: true
+		System.out.println(perm("ABc", "CAb")); // Result after comparing the strings: true
+		System.out.println(perm("a", "Ab")); // Result after comparing the strings: false
+		System.out.println(perm("", "")); // Result after comparing the strings: true
+		System.out.println(perm("ACB!", "ACB!")); // Strings should only contain letters.\nfalse
+		
 	}
 	
-	public static boolean fun(String s1, String s2){
+	public static boolean arePermutations(String s1, String s2){ 
 		int l1 = s1.length(), l2 = s2.length();		
 
-		if(l1 != l2){
+		if(l1 != l2){ // if inputs are different in size, they are clearly not permutations of each other
 			print();
 			return false;
 		}
@@ -15,14 +20,14 @@ public class Q1{
 		s1 = s1.toLowerCase();
 		s2 = s2.toLowerCase();
 		
-		if(!checkStr(s1, s2)){
+		if(!checkStr(s1, s2)){ // inputs must be letters only 
 			System.out.println("Strings should only contain letters.");
 			print();
 			return false;
 		}
 		print();
 
-		int[] v = new int[27];	
+		int[] v = new int[26];	
 
 		for(int i = 0; i < l1; i++)
 			v[s1.charAt(i) - 'a'] ++;
