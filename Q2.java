@@ -21,17 +21,22 @@ public class Q2{
 class LinkedList{
 	Node head;
 	int size;
+	Node last; // points to the last element
 
 	LinkedList(){
 		size = 0;
 	}
 
-	LinkedList append(int n){
-		if(size == 0)
-			this.head = new Node(n);
-		else
-			this.get(size - 1).next = new Node(n);
+	LinkedList append(int n){ //
+		Node end = new Node(n);	
+		
+		if(size == 0){
+			this.head = end;
+		}else{				
+			last.next = end;
+		}
 		size++;
+		last = end;
 		
 		return this;
 	}
